@@ -5,16 +5,20 @@ Swagger UI for Golang
 
 Brings Swagger UI to Go. This package implements an `http.Handler` which serves the Swagger UI. No assets needed, as the Swagger UI javascript and css assets are embedded.
 
+![Go Report Card](_screenshot.png)
+
+## What's inside?
+
 This includes three flavors:
 
-#### ***`SwaggerHandler()`***
+#### ***`swaggerui.SwaggerHandler()`***
 Which searches for, in this order, a `swagger.json`, `swagger.yml` or `swagger.yaml` file on the filesystem.
 It searches the path of the caller function and the path of the executable, up to four parent folders.
 
-#### ***`SwaggerFileHandler(path string)`***
+#### ***`swaggerui.SwaggerFileHandler(path)`***
 Handles a specified path to a swagger file (`json` or `yaml` format)
 
-#### ***`SwaggerUrlHandler(url string)`***
+#### ***`swaggerui.SwaggerUrlHandler(url)`***
 Handles a local or remote url to a swagger file.
 
 ## Examples
