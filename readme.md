@@ -1,4 +1,7 @@
-# Swagger UI for Golang
+Swagger UI for Golang
+===========
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/asaskevich/govalidator)]
 
 Brings Swagger UI to Go. This package implements an `http.Handler` which serves the Swagger UI. No assets needed, as the Swagger UI javascript and css assets are embedded.
 
