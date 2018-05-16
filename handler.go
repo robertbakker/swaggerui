@@ -3,14 +3,14 @@ package swaggerui
 //go:generate go-bindata-assetfs -pkg swaggerui data/...
 
 import (
-	"net/http"
-	"html/template"
-	"path/filepath"
-	"io/ioutil"
-	"github.com/ghodss/yaml"
-	"runtime"
-	"os"
 	"errors"
+	"github.com/ghodss/yaml"
+	"html/template"
+	"io/ioutil"
+	"net/http"
+	"os"
+	"path/filepath"
+	"runtime"
 	"strings"
 )
 

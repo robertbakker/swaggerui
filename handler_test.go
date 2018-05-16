@@ -1,12 +1,12 @@
 package swaggerui
 
 import (
-	"testing"
-	"net/http/httptest"
-	"io/ioutil"
-	"strings"
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
+	"net/http/httptest"
+	"strings"
+	"testing"
 )
 
 func TestSwaggerHandler(t *testing.T) {
@@ -50,14 +50,20 @@ func TestSwaggerHandler(t *testing.T) {
 
 	// Shallow test if filesystem does it's job
 	{
-		r := httptest.NewRequest("GET", "/swagger-ui.css", nil)
-		w := httptest.NewRecorder()
+		files := []string{"favicon-16x16.png", "favicon-32x32.png",
+			"oauth2-redirect.html", "swagger-ui.css",
+			"swagger-ui-bundle.js", "swagger-ui-standalone-preset.js"}
 
-		h.ServeHTTP(w, r)
+		for _, f := range files {
+			r := httptest.NewRequest("GET", "/"+f, nil)
+			w := httptest.NewRecorder()
 
-		res := w.Result()
-		if res.StatusCode != http.StatusOK {
-			t.Fatal("status not ok")
+			h.ServeHTTP(w, r)
+
+			res := w.Result()
+			if res.StatusCode != http.StatusOK {
+				t.Fatal("status not ok")
+			}
 		}
 	}
 }
