@@ -18,7 +18,7 @@ It searches the path of the caller function and the path of the executable, up t
 #### ***`swaggerui.SwaggerFileHandler(path)`***
 Handles a specified path to a swagger file (`json` or `yaml` format)
 
-#### ***`swaggerui.SwaggerUrlHandler(url)`***
+#### ***`swaggerui.SwaggerURLHandler(url)`***
 Handles a local or remote url to a swagger file.
 
 ## Examples
@@ -30,7 +30,7 @@ http.ListenAndServe(":8080", swaggerui.SwaggerHandler())
 
 The famous pet store:
 ```
-http.ListenAndServe(":8080", swaggerui.SwaggerUrlHandler("http://petstore.swagger.io/v2/swagger.json"))
+http.ListenAndServe(":8080", swaggerui.SwaggerURLHandler("http://petstore.swagger.io/v2/swagger.json"))
 ```
 
 Using a file from the system:

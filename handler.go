@@ -17,9 +17,9 @@ import (
 type swaggerUIHandler struct {
 	tmpl        *template.Template
 	useFile     bool
-	useUrl      bool
-	isYaml      bool
-	swaggerUrl  string
+	useURL      bool
+	isYAML      bool
+	swaggerURL  string
 	swaggerPath string
 	fileHandler http.Handler
 }
@@ -28,9 +28,9 @@ func (h swaggerUIHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/", "":
 		data := struct {
-			SwaggerJsonUrl string
+			SwaggerJSONURL string
 		}{
-			SwaggerJsonUrl: h.swaggerUrl,
+			SwaggerJSONURL: h.swaggerURL,
 		}
 		h.tmpl.Execute(w, data)
 		return
@@ -46,13 +46,13 @@ func (h swaggerUIHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		if !h.isYaml {
+		if !h.isYAML {
 			w.Header().Set("Content-Type", "application/json")
 			w.Write(dat)
 			return
 		}
 
-		if h.isYaml {
+		if h.isYAML {
 			json, err := yaml.YAMLToJSON(dat)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -67,18 +67,18 @@ func (h swaggerUIHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *swaggerUIHandler) setUrl(url string) {
-	h.swaggerUrl = url
-	h.useUrl = true
+func (h *swaggerUIHandler) setURL(url string) {
+	h.swaggerURL = url
+	h.useURL = true
 }
 
 func (h *swaggerUIHandler) setFilePath(path string) {
 	h.swaggerPath = path
-	h.swaggerUrl = "./swagger.json"
+	h.swaggerURL = "./swagger.json"
 	h.useFile = true
 	ext := filepath.Ext(path)
 	if ext == ".yml" || ext == ".yaml" {
-		h.isYaml = true
+		h.isYAML = true
 	}
 }
 
@@ -128,7 +128,7 @@ func h() *swaggerUIHandler {
 	return h
 }
 
-// Returns an http.Handler compatible handler
+// SwaggerHandler returns an http.Handler compatible handler
 // It serves the Swagger UI from a Swagger definitions file,
 // which is automatically searched for on the filesystem
 func SwaggerHandler() *swaggerUIHandler {
@@ -140,7 +140,7 @@ func SwaggerHandler() *swaggerUIHandler {
 	return h
 }
 
-// Returns an http.Handler compatible handler
+// SwaggerFileHandler returns an http.Handler compatible handler
 // It serves the Swagger UI from a local Swagger definitions file on disk
 func SwaggerFileHandler(swaggerFile string) *swaggerUIHandler {
 	h := h()
@@ -149,11 +149,11 @@ func SwaggerFileHandler(swaggerFile string) *swaggerUIHandler {
 	return h
 }
 
-// Returns an http.Handler compatible handler
+// SwaggerURLHandler returns an http.Handler compatible handler
 // It serves the Swagger UI from a remote Swagger definitions file
-func SwaggerUrlHandler(url string) *swaggerUIHandler {
+func SwaggerURLHandler(url string) *swaggerUIHandler {
 	h := h()
-	h.setUrl(url)
+	h.setURL(url)
 
 	return h
 }
@@ -233,7 +233,7 @@ window.onload = function() {
   
   // Build a system
   const ui = SwaggerUIBundle({
-    url: "{{.SwaggerJsonUrl}}",
+    url: "{{.SwaggerJSONURL}}",
     dom_id: '#swagger-ui',
     deepLinking: true,
     presets: [

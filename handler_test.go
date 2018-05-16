@@ -68,7 +68,7 @@ func TestSwaggerHandler(t *testing.T) {
 	}
 }
 func TestSwaggerUrlHandler(t *testing.T) {
-	h := SwaggerUrlHandler("test_url_is_test")
+	h := SwaggerURLHandler("test_url_is_test")
 
 	// Test if the index has set up the url
 	{
