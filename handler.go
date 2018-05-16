@@ -128,6 +128,9 @@ func h() *swaggerUIHandler {
 	return h
 }
 
+// Returns an http.Handler compatible handler
+// It serves the Swagger UI from a Swagger definitions file,
+// which is automatically searched for on the filesystem
 func SwaggerHandler() *swaggerUIHandler {
 	h := h()
 	swaggerFile, err := searchSwaggerFile()
@@ -136,6 +139,9 @@ func SwaggerHandler() *swaggerUIHandler {
 	}
 	return h
 }
+
+// Returns an http.Handler compatible handler
+// It serves the Swagger UI from a local Swagger definitions file on disk
 func SwaggerFileHandler(swaggerFile string) *swaggerUIHandler {
 	h := h()
 	h.setFilePath(swaggerFile)
@@ -143,6 +149,8 @@ func SwaggerFileHandler(swaggerFile string) *swaggerUIHandler {
 	return h
 }
 
+// Returns an http.Handler compatible handler
+// It serves the Swagger UI from a remote Swagger definitions file
 func SwaggerUrlHandler(url string) *swaggerUIHandler {
 	h := h()
 	h.setUrl(url)
